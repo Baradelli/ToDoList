@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 import './styles.scss'
 
@@ -22,7 +22,9 @@ export function App() {
 
   const finisheTasks = tasks.filter((task) => task.isFinished === true).length
 
-  function handleNewTask() {
+  function handleNewTask(e: FormEvent) {
+    e.preventDefault()
+
     if (!text) return
 
     const id = generateUniqueId(tasks)
@@ -62,7 +64,7 @@ export function App() {
       <header>
         <img src={logo} alt="logo" />
 
-        <div className="submit-task">
+        <form className="submit-task" onSubmit={handleNewTask}>
           <input
             type="text"
             placeholder="Adicione uma nova tarefa"
@@ -70,10 +72,10 @@ export function App() {
             onChange={(e) => setText(e.target.value)}
           />
 
-          <button onClick={handleNewTask}>
+          <button type="submit" onClick={handleNewTask}>
             Criar <img src={plus} alt="plus" />
           </button>
-        </div>
+        </form>
       </header>
 
       <main>
@@ -92,7 +94,7 @@ export function App() {
         {tasks.length ? (
           <div className="tasks">
             {tasks.map((task) => (
-              <div className="card">
+              <div className="card" key={task.id}>
                 <input
                   type="checkbox"
                   defaultChecked={task.isFinished}

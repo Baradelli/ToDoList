@@ -183,7 +183,9 @@ main {
   .tasks {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
+
+    margin-bottom: 0.75rem;
 
     .card {
       background-color: var(--gray-500);
@@ -195,7 +197,7 @@ main {
       align-items: center;
       justify-content: space-between;
 
-      gap: 12px;
+      gap: 0.75rem;
       padding: 16px;
 
       input[type='checkbox'] {
